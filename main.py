@@ -36,8 +36,6 @@ MOTOR_BODY_ENB = 32   # Physical pin 32 (GPIO 12)
 # Audio Detector - You might need to adjust this if it's connected differently
 AUDIO_DETECTOR = 36   # Physical pin 7 (GPIO 4) - This is just a placeholder, adjust as needed
 
-
-
 print(MOTOR_MOUTH_ENA, MOTOR_MOUTH_IN1, MOTOR_MOUTH_IN2, MOTOR_BODY_IN3, MOTOR_BODY_IN4, MOTOR_BODY_ENB, AUDIO_DETECTOR)
 
 GPIO.setmode(GPIO.BOARD)  # Use physical pin numbering
@@ -67,22 +65,49 @@ def get_chatgpt_response(prompt):
     return response.choices[0].message.content
 
 def move_mouth():
-    # GPIO.output(MOUTH_PIN, GPIO.HIGH)
+    # Enable motor (MOTOR_MOUTH_ENA)
     GPIO.output(MOTOR_MOUTH_ENA, GPIO.HIGH)
+
+    # Set direction for the mouth movement
+    GPIO.output(MOTOR_MOUTH_IN1, GPIO.HIGH)  # Forward
+    GPIO.output(MOTOR_MOUTH_IN2, GPIO.LOW)   # Ensure opposite direction pin is LOW
+
+    # Run for a short period of time
     time.sleep(0.5)
-    GPIO.output(MOTOR_MOUTH_ENA, GPIO.LOW)
+
+    # Stop the motor
+    GPIO.output(MOTOR_MOUTH_ENA, GPIO.LOW)   # Disable motor
+    GPIO.output(MOTOR_MOUTH_IN1, GPIO.LOW)   # Stop movement
 
 def move_head():
-    # GPIO.output(HEAD_PIN, GPIO.HIGH)
-    GPIO.output(MOTOR_BODY_IN3, GPIO.HIGH)
+    # Enable motor (MOTOR_BODY_ENB)
+    GPIO.output(MOTOR_BODY_ENB, GPIO.HIGH)
+
+    # Set direction for the head movement
+    GPIO.output(MOTOR_BODY_IN3, GPIO.HIGH)  # Forward
+    GPIO.output(MOTOR_BODY_IN4, GPIO.LOW)   # Ensure opposite direction pin is LOW
+
+    # Run for a short period of time
     time.sleep(0.5)
-    GPIO.output(MOTOR_BODY_IN3, GPIO.LOW)
+
+    # Stop the motor
+    GPIO.output(MOTOR_BODY_ENB, GPIO.LOW)   # Disable motor
+    GPIO.output(MOTOR_BODY_IN3, GPIO.LOW)   # Stop movement
 
 def move_tail():
-    # GPIO.output(TAIL_PIN, GPIO.HIGH)
-    GPIO.output(MOTOR_BODY_IN4, GPIO.HIGH)
+    # Enable motor (MOTOR_BODY_ENB)
+    GPIO.output(MOTOR_BODY_ENB, GPIO.HIGH)
+
+    # Set direction for the tail movement
+    GPIO.output(MOTOR_BODY_IN4, GPIO.HIGH)  # Forward
+    GPIO.output(MOTOR_BODY_IN3, GPIO.LOW)   # Ensure opposite direction pin is LOW
+
+    # Run for a short period of time
     time.sleep(0.5)
-    GPIO.output(MOTOR_BODY_IN4, GPIO.LOW)
+
+    # Stop the motor
+    GPIO.output(MOTOR_BODY_ENB, GPIO.LOW)   # Disable motor
+    GPIO.output(MOTOR_BODY_IN4, GPIO.LOW)   # Stop movement
 
 def text_to_speech(text):
     tts = gTTS(text=text, lang='en')
