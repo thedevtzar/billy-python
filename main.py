@@ -1,5 +1,4 @@
-
-import openai
+from openai import OpenAI
 import RPi.GPIO as GPIO
 import time
 from gtts import gTTS
@@ -9,7 +8,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Set up OpenAI API key
-openai.api_key = os.getenv('OPENAI_API_KEY')
+openai = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 # Set up GPIO pins for Billy Bass control
 
 MOUTH_PIN = 17
@@ -22,12 +21,15 @@ GPIO.setup(HEAD_PIN, GPIO.OUT)
 GPIO.setup(TAIL_PIN, GPIO.OUT)
 
 def get_chatgpt_response(prompt):
-    response = openai.Completion.create(
-        engine="text-davinci-002",
-        prompt=prompt,
+    response = openai.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": "You are a helpful assistant."},
+            {"role": "user", "content": prompt}
+        ],
         max_tokens=150
     )
-    return response.choices[0].text.strip()
+    return response.choices[0].message
 
 def move_mouth():
     GPIO.output(MOUTH_PIN, GPIO.HIGH)
@@ -57,6 +59,8 @@ def main():
         # Get response from ChatGPT
         response = get_chatgpt_response(user_input)
         
+        print(response)
+        
         # Move Billy Bass
         move_head()
         move_tail()
@@ -74,4 +78,5 @@ if __name__ == "__main__":
     try:
         main()
     finally:
+        # print("Cleaning up GPIO")
         GPIO.cleanup()
