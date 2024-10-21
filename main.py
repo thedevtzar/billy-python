@@ -4,11 +4,14 @@ import RPi.GPIO as GPIO
 import time
 from gtts import gTTS
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Set up OpenAI API key
-openai.api_key = 'your-api-key-here'
-
+openai.api_key = os.getenv('OPENAI_API_KEY')
 # Set up GPIO pins for Billy Bass control
+
 MOUTH_PIN = 17
 HEAD_PIN = 18
 TAIL_PIN = 19
@@ -48,6 +51,7 @@ def text_to_speech(text):
 
 def main():
     while True:
+        # we will be getting data from pump fun here, this is just a placeholder
         user_input = input("Enter your question: ")
         
         # Get response from ChatGPT

@@ -1,4 +1,4 @@
 openai
 gtts
 RPi.GPIO
-
+python-dotenv
