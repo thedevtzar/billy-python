@@ -10,8 +10,8 @@ load_dotenv()
 
 # Set up OpenAI API key
 # openai = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
-# openai = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
-openai = OpenAI(api_key="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")
+openai = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
+# openai = OpenAI(api_key="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")
 # Set up GPIO pins for Billy Bass control
 
 
