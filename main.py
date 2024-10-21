@@ -25,14 +25,16 @@ load_dotenv('gpio.env')
 # MOTOR_BODY_IN4 = int(os.getenv('MOTOR_BODY_IN4'))
 # MOTOR_BODY_ENB = int(os.getenv('MOTOR_BODY_ENB'))
 # AUDIO_DETECTOR = int(os.getenv('AUDIO_DETECTOR'))
+# Updated pin assignments based on your explanation
+MOTOR_MOUTH_ENA = 29  # Physical pin 29 (GPIO 5)
+MOTOR_MOUTH_IN1 = 31  # Physical pin 31 (GPIO 6)
+MOTOR_MOUTH_IN2 = 33  # Physical pin 33 (GPIO 13) - PWM1
+MOTOR_BODY_ENB = 32   # Physical pin 32 (GPIO 12)
+MOTOR_BODY_IN3 = 37   # Physical pin 37 (GPIO 26)
+MOTOR_BODY_IN4 = 16   # Physical pin 16 (GPIO 23) - Assuming this is still correct
 
-MOTOR_MOUTH_ENA=7     # Physical pin 7 (GPIO 4)
-MOTOR_MOUTH_IN1=11    # Physical pin 11 (GPIO 17)
-MOTOR_MOUTH_IN2=13    # Physical pin 13 (GPIO 27)
-MOTOR_BODY_IN3=15     # Physical pin 15 (GPIO 22)
-MOTOR_BODY_IN4=16     # Physical pin 16 (GPIO 23)
-MOTOR_BODY_ENB=18     # Physical pin 18 (GPIO 24)
-AUDIO_DETECTOR=29     # Physical pin 29 (GPIO 5)
+# Audio Detector - You might need to adjust this if it's connected differently
+AUDIO_DETECTOR = 36   # Physical pin 7 (GPIO 4) - This is just a placeholder, adjust as needed
 
 
 
