@@ -29,9 +29,9 @@ load_dotenv('gpio.env')
 MOTOR_MOUTH_ENA = 29  # Physical pin 29 (GPIO 5)
 MOTOR_MOUTH_IN1 = 31  # Physical pin 31 (GPIO 6)
 MOTOR_MOUTH_IN2 = 33  # Physical pin 33 (GPIO 13) - PWM1
+MOTOR_BODY_IN3 = 35   # Physical pin 37 (GPIO 26)
+MOTOR_BODY_IN4 = 37   # Physical pin 16 (GPIO 23) - Assuming this is still correct
 MOTOR_BODY_ENB = 32   # Physical pin 32 (GPIO 12)
-MOTOR_BODY_IN3 = 37   # Physical pin 37 (GPIO 26)
-MOTOR_BODY_IN4 = 16   # Physical pin 16 (GPIO 23) - Assuming this is still correct
 
 # Audio Detector - You might need to adjust this if it's connected differently
 AUDIO_DETECTOR = 36   # Physical pin 7 (GPIO 4) - This is just a placeholder, adjust as needed
