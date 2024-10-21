@@ -17,14 +17,24 @@ openai = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 # Load environment variables
 load_dotenv('gpio.env')
 
-# Set up GPIO pins for Billy Bass control
-MOTOR_MOUTH_ENA = int(os.getenv('MOTOR_MOUTH_ENA'))
-MOTOR_MOUTH_IN1 = int(os.getenv('MOTOR_MOUTH_IN1'))
-MOTOR_MOUTH_IN2 = int(os.getenv('MOTOR_MOUTH_IN2'))
-MOTOR_BODY_IN3 = int(os.getenv('MOTOR_BODY_IN3'))
-MOTOR_BODY_IN4 = int(os.getenv('MOTOR_BODY_IN4'))
-MOTOR_BODY_ENB = int(os.getenv('MOTOR_BODY_ENB'))
-AUDIO_DETECTOR = int(os.getenv('AUDIO_DETECTOR'))
+# # Set up GPIO pins for Billy Bass control
+# MOTOR_MOUTH_ENA = int(os.getenv('MOTOR_MOUTH_ENA'))
+# MOTOR_MOUTH_IN1 = int(os.getenv('MOTOR_MOUTH_IN1'))
+# MOTOR_MOUTH_IN2 = int(os.getenv('MOTOR_MOUTH_IN2'))
+# MOTOR_BODY_IN3 = int(os.getenv('MOTOR_BODY_IN3'))
+# MOTOR_BODY_IN4 = int(os.getenv('MOTOR_BODY_IN4'))
+# MOTOR_BODY_ENB = int(os.getenv('MOTOR_BODY_ENB'))
+# AUDIO_DETECTOR = int(os.getenv('AUDIO_DETECTOR'))
+
+MOTOR_MOUTH_ENA=7     # Physical pin 7 (GPIO 4)
+MOTOR_MOUTH_IN1=11    # Physical pin 11 (GPIO 17)
+MOTOR_MOUTH_IN2=13    # Physical pin 13 (GPIO 27)
+MOTOR_BODY_IN3=15     # Physical pin 15 (GPIO 22)
+MOTOR_BODY_IN4=16     # Physical pin 16 (GPIO 23)
+MOTOR_BODY_ENB=18     # Physical pin 18 (GPIO 24)
+AUDIO_DETECTOR=29     # Physical pin 29 (GPIO 5)
+
+
 
 print(MOTOR_MOUTH_ENA, MOTOR_MOUTH_IN1, MOTOR_MOUTH_IN2, MOTOR_BODY_IN3, MOTOR_BODY_IN4, MOTOR_BODY_ENB, AUDIO_DETECTOR)
 
