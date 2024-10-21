@@ -15,7 +15,7 @@ openai = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 
 
 # Load environment variables
-load_dotenv('gpio.env')
+# load_dotenv('gpio.env')
 
 # # Set up GPIO pins for Billy Bass control
 # MOTOR_MOUTH_ENA = int(os.getenv('MOTOR_MOUTH_ENA'))
