@@ -29,7 +29,7 @@ def get_chatgpt_response(prompt):
         ],
         max_tokens=150
     )
-    return response.choices[0].message
+    return response.choices[0].message.content
 
 def move_mouth():
     GPIO.output(MOUTH_PIN, GPIO.HIGH)
