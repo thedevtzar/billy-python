@@ -7,18 +7,41 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 # Set up OpenAI API key
 openai = OpenAI(api_key=os.getenv('OPENAI_API_KEY'))
 # Set up GPIO pins for Billy Bass control
 
-MOUTH_PIN = 17
-HEAD_PIN = 18
-TAIL_PIN = 19
 
-GPIO.setmode(GPIO.BCM)
-GPIO.setup(MOUTH_PIN, GPIO.OUT)
-GPIO.setup(HEAD_PIN, GPIO.OUT)
-GPIO.setup(TAIL_PIN, GPIO.OUT)
+
+# Load environment variables
+load_dotenv('gpio.env')
+
+# Set up GPIO pins for Billy Bass control
+MOTOR_MOUTH_ENA = int(os.getenv('MOTOR_MOUTH_ENA'))
+MOTOR_MOUTH_IN1 = int(os.getenv('MOTOR_MOUTH_IN1'))
+MOTOR_MOUTH_IN2 = int(os.getenv('MOTOR_MOUTH_IN2'))
+MOTOR_BODY_IN3 = int(os.getenv('MOTOR_BODY_IN3'))
+MOTOR_BODY_IN4 = int(os.getenv('MOTOR_BODY_IN4'))
+MOTOR_BODY_ENB = int(os.getenv('MOTOR_BODY_ENB'))
+AUDIO_DETECTOR = int(os.getenv('AUDIO_DETECTOR'))
+
+print(MOTOR_MOUTH_ENA, MOTOR_MOUTH_IN1, MOTOR_MOUTH_IN2, MOTOR_BODY_IN3, MOTOR_BODY_IN4, MOTOR_BODY_ENB, AUDIO_DETECTOR)
+
+GPIO.setmode(GPIO.BOARD)  # Use physical pin numbering
+GPIO.setup(MOTOR_MOUTH_ENA, GPIO.OUT)
+GPIO.setup(MOTOR_MOUTH_IN1, GPIO.OUT)
+GPIO.setup(MOTOR_MOUTH_IN2, GPIO.OUT)
+GPIO.setup(MOTOR_BODY_IN3, GPIO.OUT)
+GPIO.setup(MOTOR_BODY_IN4, GPIO.OUT)
+GPIO.setup(MOTOR_BODY_ENB, GPIO.OUT)
+GPIO.setup(AUDIO_DETECTOR, GPIO.IN)
+
+
+# GPIO.setmode(GPIO.BCM)
+# GPIO.setup(MOUTH_PIN, GPIO.OUT)
+# GPIO.setup(HEAD_PIN, GPIO.OUT)
+# GPIO.setup(TAIL_PIN, GPIO.OUT)
 
 def get_chatgpt_response(prompt):
     response = openai.chat.completions.create(
@@ -32,19 +55,22 @@ def get_chatgpt_response(prompt):
     return response.choices[0].message.content
 
 def move_mouth():
-    GPIO.output(MOUTH_PIN, GPIO.HIGH)
+    # GPIO.output(MOUTH_PIN, GPIO.HIGH)
+    GPIO.output(MOTOR_MOUTH_ENA, GPIO.HIGH)
     time.sleep(0.5)
-    GPIO.output(MOUTH_PIN, GPIO.LOW)
+    GPIO.output(MOTOR_MOUTH_ENA, GPIO.LOW)
 
 def move_head():
-    GPIO.output(HEAD_PIN, GPIO.HIGH)
+    # GPIO.output(HEAD_PIN, GPIO.HIGH)
+    GPIO.output(MOTOR_BODY_IN3, GPIO.HIGH)
     time.sleep(0.5)
-    GPIO.output(HEAD_PIN, GPIO.LOW)
+    GPIO.output(MOTOR_BODY_IN3, GPIO.LOW)
 
 def move_tail():
-    GPIO.output(TAIL_PIN, GPIO.HIGH)
+    # GPIO.output(TAIL_PIN, GPIO.HIGH)
+    GPIO.output(MOTOR_BODY_IN4, GPIO.HIGH)
     time.sleep(0.5)
-    GPIO.output(TAIL_PIN, GPIO.LOW)
+    GPIO.output(MOTOR_BODY_IN4, GPIO.LOW)
 
 def text_to_speech(text):
     tts = gTTS(text=text, lang='en')
