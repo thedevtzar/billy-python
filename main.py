@@ -118,27 +118,67 @@ def text_to_speech(text):
 
 def main():
     while True:
-        # we will be getting data from pump fun here, this is just a placeholder
-        user_input = input("Enter your question: ")
+        test_all_movements()
         
-        # Get response from ChatGPT
-        response = get_chatgpt_response(user_input)
         
-        print(response)
-        
-        # Move Billy Bass
-        move_head()
-        move_tail()
-        
-        # Convert response to speech and move mouth
-        words = response.split()
-        for word in words:
-            move_mouth()
-            time.sleep(0.2)
-        
-        # Speak the response
-        text_to_speech(response)
 
+# def main():
+#     while True:
+#         # we will be getting data from pump fun here, this is just a placeholder
+#         user_input = input("Enter your question: ")
+        
+#         # Get response from ChatGPT
+#         response = get_chatgpt_response(user_input)
+        
+#         print(response)
+        
+#         # Move Billy Bass
+#         move_head()
+#         move_tail()
+        
+#         # Convert response to speech and move mouth
+#         words = response.split()
+#         for word in words:
+#             move_mouth()
+#             time.sleep(0.2)
+        
+#         # Speak the response
+#         text_to_speech(response)
+
+
+def test_all_movements():
+    try:
+        print("Starting continuous movement test. Press CTRL+C to stop.")
+        while True:
+            # Move mouth
+            GPIO.output(MOTOR_MOUTH_ENA, GPIO.HIGH)
+            GPIO.output(MOTOR_MOUTH_IN1, GPIO.HIGH)
+            GPIO.output(MOTOR_MOUTH_IN2, GPIO.LOW)
+            
+            # Move head/tail (alternating)
+            GPIO.output(MOTOR_BODY_ENB, GPIO.HIGH)
+            GPIO.output(MOTOR_BODY_IN3, GPIO.HIGH)
+            GPIO.output(MOTOR_BODY_IN4, GPIO.LOW)
+            
+            time.sleep(1)  # Run for 1 second
+            
+            # Reverse head/tail movement
+            GPIO.output(MOTOR_BODY_IN3, GPIO.LOW)
+            GPIO.output(MOTOR_BODY_IN4, GPIO.HIGH)
+            
+            time.sleep(1)  # Run for 1 second
+            
+    except KeyboardInterrupt:
+        print("\nTest stopped by user.")
+    finally:
+        # Turn off all motors
+        GPIO.output(MOTOR_MOUTH_ENA, GPIO.LOW)
+        GPIO.output(MOTOR_BODY_ENB, GPIO.LOW)
+        GPIO.output(MOTOR_MOUTH_IN1, GPIO.LOW)
+        GPIO.output(MOTOR_MOUTH_IN2, GPIO.LOW)
+        GPIO.output(MOTOR_BODY_IN3, GPIO.LOW)
+        GPIO.output(MOTOR_BODY_IN4, GPIO.LOW)
+        
 if __name__ == "__main__":
     try:
         main()
