@@ -122,28 +122,28 @@ def main():
         
         
 
-# def main():
-#     while True:
-#         # we will be getting data from pump fun here, this is just a placeholder
-#         user_input = input("Enter your question: ")
+def main():
+    while True:
+        # we will be getting data from pump fun here, this is just a placeholder
+        user_input = input("Enter your question: ")
         
-#         # Get response from ChatGPT
-#         response = get_chatgpt_response(user_input)
+        # Get response from ChatGPT
+        response = get_chatgpt_response(user_input)
         
-#         print(response)
+        print(response)
         
-#         # Move Billy Bass
-#         move_head()
-#         move_tail()
+        # Move Billy Bass
+        move_head()
+        move_tail()
         
-#         # Convert response to speech and move mouth
-#         words = response.split()
-#         for word in words:
-#             move_mouth()
-#             time.sleep(0.2)
+        # Convert response to speech and move mouth
+        words = response.split()
+        for word in words:
+            move_mouth()
+            time.sleep(0.2)
         
-#         # Speak the response
-#         text_to_speech(response)
+        # Speak the response
+        text_to_speech(response)
 
 
 def test_all_movements():
