@@ -116,9 +116,9 @@ def text_to_speech(text):
     tts.save("response.mp3")
     os.system("mpg321 response.mp3")
 
-def main():
-    while True:
-        test_all_movements()
+# def main():
+#     while True:
+#         test_all_movements()
         
         
 
